@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "formik": "^2.2.9",
+    "mongoose": "^6.0.13",
+    "path": "^0.12.7",
+    "socket.io": "^4.3.2"
+  },
+  "name": "junaid-mern-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
