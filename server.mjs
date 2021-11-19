@@ -7,7 +7,7 @@ import { Server } from "socket.io";
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 5001
 const app = express()
-mongoose.connect('mongodb+srv://dbuser:dbpassword@cluster0.nr4e4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://junaid:123@cluster0.agtya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 const Cricket = mongoose.model("Cricket", {
     tournament: String,
     date: String,
