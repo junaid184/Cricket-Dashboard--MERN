@@ -29,10 +29,10 @@ const Cricket = mongoose.model("Cricket", {
     created: { type: Date, default: Date.now },
 })
 app.use(express.json())
-
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:5001"],
-    credentials: true
+    origin: true
+    // origin: ["http://localhost:3000", "http://localhost:5001"],
+    // credentials: true
 }))
 app.use('/', express.static(path.join(__dirname, 'web/build')))
 app.get("/", (req, res, next) => {
@@ -88,10 +88,9 @@ app.post("/api/v1/cricket", (req, res) => {
 
 
 app.get("/api/v1/posts", (req, res) => {
-    Cricket.find({})
-    .sort({ created: "desc" })
-    .limit(1)
-    .exc((err, data)=>{
+    Cricket.findOne({})
+    .sort({ _id: "desc" })
+    .exec((err, data)=>{
         res.send(data);
     })
 

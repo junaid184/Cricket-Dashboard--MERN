@@ -1,10 +1,23 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import io from 'socket.io-client';
 const dev = "http://localhost:5001"
 const baseUrl = window.location.hostname.split(":")[0] === "localhost" ? dev : "";
 function Home(){
-    const [data, setData] = useState([])
-  useEffect(() => {
+    const [data, setData] = useState({})
+
+    useEffect(()=>{
+        axios.get(`${baseUrl}/api/v1/posts`)
+        .then((res)=>{
+            console.log(res.data);
+            setData(res.data);
+        })
+        .catch((e)=>{
+            console.log(e.message)
+        })
+    }, [])
+
+    useEffect(() => {
     const socket = io(baseUrl); // to connect with locally running Socker.io server
 
     socket.on('connect', function () {
@@ -15,9 +28,7 @@ function Home(){
     });
     socket.on('Cricket', (obj)=> {
         console.log(obj);
-        setData((perv)=>[obj, ...perv])
-        console.log(data);
-        
+        setData(obj)
     });
 
     return () => {
@@ -27,25 +38,25 @@ function Home(){
 return(
     <div>
     <h2>
-       {data[0]?.tournament} 
+       {data?.tournament} 
     </h2>
-    <h3> {data[0]?.inning} </h3>
-    <h3>Date: {data[0]?.date}</h3>
-    <h3>Headline: {data[0]?.headline}</h3>
-    <h3>Toss: {data[0]?.toss}</h3>
+    <h3> {data?.inning} </h3>
+    <h3>Date: {data?.date}</h3>
+    <h3>Headline: {data?.headline}</h3>
+    <h3>Toss: {data?.toss}</h3>
     <ul>
-        <h3>{data[0]?.teamOne}</h3>
-        <li>Score: {data[0]?.scoreOne}/{data[0]?.wicketsOne}</li>
-        <li>Over: {data[0]?.oversOne}</li>
-        <li>Batsman One: {data[0]?.batsmanOne}</li>
-        <li>Batsman Two: {data[0]?.batsmanTwo}</li>
+        <h3>{data?.teamOne}</h3>
+        <li>Score: {data?.scoreOne}/{data?.wicketsOne}</li>
+        <li>Over: {data?.oversOne}</li>
+        <li>Batsman One: {data?.batsmanOne}</li>
+        <li>Batsman Two: {data?.batsmanTwo}</li>
     </ul>
     <ul>
-        <h3>{data[0]?.teamTwo}</h3>
-        <li>Score: {data[0]?.scoreTwo}/{data[0]?.wicketsTwo}</li>
-        <li>Over: {data[0]?.overTwo}</li>
-        <li>Bowler One: {data[0]?.bowlerOne}</li>
-        <li>Bowler Two: {data[0]?.bowlerTwo}</li>
+        <h3>{data?.teamTwo}</h3>
+        <li>Score: {data?.scoreTwo}/{data?.wicketsTwo}</li>
+        <li>Over: {data?.overTwo}</li>
+        <li>Bowler One: {data?.bowlerOne}</li>
+        <li>Bowler Two: {data?.bowlerTwo}</li>
     </ul>
     </div>
 )
