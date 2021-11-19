@@ -107,13 +107,6 @@ const io = new Server(server, { cors: { origin: "*", methods: "*", } });
 
 io.on("connection", (socket) => {
     console.log("New client connected with id: ", socket.id);
-
-    // to emit data to a certain client
-    socket.emit("topic 1", "some data")
-
-    // collecting connected users in a array
-    // connectedUsers.push(socket)
-
     socket.on("disconnect", (message) => {
         console.log("Client disconnected with id: ", message);
     });
